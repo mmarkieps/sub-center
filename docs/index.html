@@ -7,12 +7,12 @@ try{
   SET @subscriberkey= _subscriberkey
 
 IF NOT EMPTY(@subscriberkey) THEN
-/*
+
   SET @subscriberId =lookup("_subscribers", "SubscriberId", "SubscriberKey", @subscriberkey)
 
 
   if not Empty(@subscriberId)  then
-
+/*
 set @subscriberRows=LookupRows("_EnterpriseAttribute","SubscriberId",@subscriberId)
 if RowCount(@subscriberRow) >0 then
 
@@ -20,8 +20,8 @@ set @subscriberRow=Row(@subscriberRow,1)
 set @firstName=Field(@subscriberRow, "first name", 0)
 
 
-endif 
 endif */
+endif 
 endif  
  ]%%
  
