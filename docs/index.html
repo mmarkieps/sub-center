@@ -19,9 +19,9 @@ if RowCount(@subscriberRow) >0 then
 set @subscriberRow=Row(@subscriberRow,1)
 set @firstName=Field(@subscriberRow, "first name", 0)
 
-*/
+
 endif 
-endif 
+endif */
 endif  
  ]%%
  
@@ -31,7 +31,7 @@ catch(e) {
  Variable.SetValue("errorMessage", "msg: "+  Stringify(e.message) + Stringify(e.description));
 }
 </script>
- 
+ %%=v(@errorMessage)=%%
 <script runat="client">
 console.log(`%%=v(@errorMessage)=%%`);
 </script>
