@@ -1,6 +1,9 @@
 
 
-
+ <script runat="server">
+  Platform.Load("Core", "1.1.1");
+  try {
+</script>
 
 <!doctype html>
 <html lang="en">
@@ -92,3 +95,23 @@ Sorry, something went wrong (missing subscriber key).
 
 
 </html>
+
+<script runat="server">
+  } catch (e) {
+</script>    
+<section>
+    <form action="%%=RequestParameter('PAGEURL')=%%" method="post">
+        <div class="pref-list popup">
+            <h2>Sorry!</h2><br>
+            Your update has failed. Please go back and try again.<br>
+            <br>
+          <p>
+            <script runat="server">Write(Stringify(e.message));</script>
+          </p>
+            <input class="Prefbtn" type="submit" value="Go Back">
+        </div>
+    </form>
+</section>
+<script runat="server">
+  }
+</script>
