@@ -21,7 +21,8 @@ if RowCount(@subscriberRows) >0 then
 set @subscriberRow=Row(@subscriberRow,1)
 set @firstName=Field(@subscriberRow, "first name", 0) 
 
-
+else
+set @firstName="nodata" 
 endif 
 endif 
 endif  
