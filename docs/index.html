@@ -31,7 +31,8 @@ catch(e) {
  Variable.SetValue("errorMessage", "msg: "+  Stringify(e.message) + Stringify(e.description));
 }
 </script>
- %%=v(@errorMessage)=%%
+
+ <span>%%=v(@errorMessage)=%%</span>
 <script runat="client">
 console.log(`%%=v(@errorMessage)=%%`);
 </script>
