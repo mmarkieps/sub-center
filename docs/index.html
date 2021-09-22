@@ -33,14 +33,14 @@ SET @subscriberkey= _subscriberkey
 
 IF NOT EMPTY(@subscriberkey) THEN
 
-set @rows =lookuprows("_subscribers", "SubscriberKey", @subscriberkey)
+set @rows =lookuprows("_EnterpriseAttribute", "SubscriberKey", @subscriberkey)
 
 
   IF RowCount(@rows) > 0 THEN
 
   SET @row = row(@rows,1)
 
-  SET @FirstName = field(@row,"FirstName",0)
+  SET @FirstName = field(@row,"[First Name]",0)
 
 
 
