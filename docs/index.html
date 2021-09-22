@@ -34,7 +34,7 @@
   <section>
 
     %%[
-      /*
+      
 SET @subscriberkey= _subscriberkey
 
 IF NOT EMPTY(@subscriberkey) THEN
@@ -49,7 +49,7 @@ if RowCount(@subscriberRow) >0 then
 
 set @subscriberRow=Row(@subscriberRow,1)
 set @firstName=Field(@subscriberRow, "first name", 0)
-endif */
+endif 
 /*  */
 
 
@@ -107,7 +107,7 @@ Sorry, something went wrong (missing subscriber key).
   } catch (e) {
 </script>    
 <section>
-    <form action="%%=RequestParameter('PAGEURL')=%%" method="post">
+    
         <div class="pref-list popup">
             <h2>Sorry!</h2><br>
             Your update has failed. Please go back and try again.<br>
@@ -115,9 +115,9 @@ Sorry, something went wrong (missing subscriber key).
           <p>
             <script runat="server">Write(Stringify(e.message));</script>
           </p>
-            <input class="Prefbtn" type="submit" value="Go Back">
+          
         </div>
-    </form>
+    
 </section>
 <script runat="server">
   }
