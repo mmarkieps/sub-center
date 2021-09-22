@@ -20,7 +20,8 @@ if RowCount(@subscriberRows) >0 then
 
 set @subscriberRow=Row(@subscriberRows,1)
 set @firstName=Field(@subscriberRow, "first name", 0) 
-
+set @lastName=Field(@subscriberRow, "last name", 0) 
+set @lastName=Field(@subscriberRow, "email", 0) 
 else
 set @firstName="nodata" 
 endif 
@@ -29,6 +30,8 @@ endif
  ]%%
   <div>%%=v(@subscriberId)=%%</div>
   <div>%%=v(@firstName)=%%</div>
+   <div>%%=v(@lastName)=%%</div>
+   <div>%%=v(@email)=%%</div>
 <script runat="server">
 }
 catch(e) {
