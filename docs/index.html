@@ -12,19 +12,20 @@ IF NOT EMPTY(@subscriberkey) THEN
 
 
   if not Empty(@subscriberId)  then
-/*
+
 set @subscriberRows=LookupRows("_EnterpriseAttribute","SubscriberId",@subscriberId)
 if RowCount(@subscriberRow) >0 then
 
+/*
 set @subscriberRow=Row(@subscriberRow,1)
 set @firstName=Field(@subscriberRow, "first name", 0)
 
-
-endif */
+*/
+endif 
 endif 
 endif  
  ]%%
- 
+  <span>%%=v(@subscriberId)=%%</span>
 <script runat="server">
 }
 catch(e) {
@@ -32,7 +33,7 @@ catch(e) {
 }
 </script>
 
- <span>1%%=v(@errorMessage)=%%</span>
+ <span>%%=v(@errorMessage)=%%</span>
 <script runat="client">
 console.log(`%%=v(@errorMessage)=%%`);
 console.log('<ctrl:var name="myVar" />');
