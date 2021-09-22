@@ -4,7 +4,7 @@
   Platform.Load("Core", "1.1.1");
   try {
 
- %%=}=%% 
+
 </script>
   
 <!doctype html>
@@ -43,8 +43,11 @@ SET @subscriberId =lookup("_subscribers", "SubscriberId", "SubscriberKey", @subs
 
   if not Empty(@subscriberId)  then
 
+set @subscriberRows=LookupRows("_EnterpriseAttribute","SubscriberId",@subscriberId)
+if RowCount(@subscriberRow) >0
 
-
+set @subscriberRow=Row(@subscriberRow,1)
+set @firstName=Field(@subscriberRow, 'first name')
 /* fetch data from Sales Cloud to show in the form */
 
 
