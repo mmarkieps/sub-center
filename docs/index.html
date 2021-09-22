@@ -11,7 +11,7 @@ IF NOT EMPTY(@subscriberkey) THEN
  SET @subscriberId =lookup("_subscribers", "SubscriberId", "SubscriberKey", @subscriberkey)
 
 
-  if not Empty(@subscriberId)  then
+  /* if not Empty(@subscriberId)  then
 
 set @subscriberRows=LookupRows("_EnterpriseAttribute","SubscriberId",@subscriberId)
 if RowCount(@subscriberRow) >0 then
@@ -20,13 +20,13 @@ set @subscriberRow=Row(@subscriberRow,1)
 set @firstName=Field(@subscriberRow, "first name", 0)
 endif 
 endif 
-endif 
+endif  */
  ]%%
  
 <script runat="server">
 }
 catch(e) {
- Variable.SetValue("errorMessage", "msg: ");
+ Variable.SetValue("errorMessage", "msg: "+  Stringify(e.message) + Stringify(e.description));
 }
 </script>
  
