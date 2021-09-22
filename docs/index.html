@@ -12,15 +12,16 @@ IF NOT EMPTY(@subscriberkey) THEN
 
 
   if not Empty(@subscriberId)  then
-/*
-set @subscriberRows=LookupRows("_EnterpriseAttribute","SubscriberId",@subscriberId)
-if RowCount(@subscriberRow) >0 then
+
+set @subscriberRows=LookupRows("_EnterpriseAttribute","SubscriberID",@subscriberId)
+
+if RowCount(@subscriberRows) >0 then
 
 
 set @subscriberRow=Row(@subscriberRow,1)
 set @firstName=Field(@subscriberRow, "first name", 0)
 
-*/
+
 endif 
 endif 
 endif  
