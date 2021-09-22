@@ -32,7 +32,7 @@ endif
 <script runat="server">
 }
 catch(e) {
- Variable.SetValue("errorMessage", "msg: ");
+ Variable.SetValue("errorMessage", "msg: " + Stringify(e.message) + Stringify(e.description));
 }
 </script>
 
