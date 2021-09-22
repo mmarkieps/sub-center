@@ -34,7 +34,7 @@
   <section>
 
     %%[
-  /*     
+ 
 SET @subscriberkey= _subscriberkey
 
 IF NOT EMPTY(@subscriberkey) THEN
@@ -50,7 +50,7 @@ if RowCount(@subscriberRow) >0 then
 set @subscriberRow=Row(@subscriberRow,1)
 set @firstName=Field(@subscriberRow, "first name", 0)
 endif 
- */
+ 
 
 
   
@@ -105,6 +105,10 @@ Sorry, something went wrong (missing subscriber key).
 
 <script runat="server">
   } catch (e) {
-console.log(e);
+ Variable.SetValue("errorMessage", Stringify(e.message) + Stringify(e.description));
   }
+</script>
+
+<script runat="client">
+console.log(`%%=v(@errorMessage)=%%`);
 </script>
