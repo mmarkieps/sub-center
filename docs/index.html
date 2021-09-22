@@ -33,16 +33,12 @@ SET @subscriberkey= _subscriberkey
 
 IF NOT EMPTY(@subscriberkey) THEN
 
-set @rows =lookuprows("_subscribers", "SubscriberKey", @subscriberkey)
+SET @subscriberId =lookup("_subscribers", "SubscriberId", "SubscriberKey", @subscriberkey)
 
 
-  IF RowCount(@rows) > 0 THEN
+  if not Empty(@subscriberId)  then
 
-  SET @row = row(@rows,1)
   
-  SET @FirstName = field(@row,"SubscriberId",0)
-
- SET @lastName = field(@row,"SubscriberKey",0)
 
 /* fetch data from Sales Cloud to show in the form */
 
