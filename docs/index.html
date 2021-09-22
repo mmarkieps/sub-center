@@ -105,20 +105,6 @@ Sorry, something went wrong (missing subscriber key).
 
 <script runat="server">
   } catch (e) {
-</script>    
-<section>
-    
-        <div class="pref-list popup">
-            <h2>Sorry!</h2><br>
-            Your update has failed. Please go back and try again.<br>
-            <br>
-          <p>
-            <script runat="server">Write(Stringify(e.message));</script>
-          </p>
-          
-        </div>
-    
-</section>
-<script runat="server">
+console.log(e);
   }
 </script>
