@@ -34,11 +34,12 @@
   <section>
 
     %%[
+      /*
 SET @subscriberkey= _subscriberkey
 
 IF NOT EMPTY(@subscriberkey) THEN
 
-/* SET @subscriberId =lookup("_subscribers", "SubscriberId", "SubscriberKey", @subscriberkey)
+ SET @subscriberId =lookup("_subscribers", "SubscriberId", "SubscriberKey", @subscriberkey)
 
 
   if not Empty(@subscriberId)  then
@@ -49,7 +50,7 @@ if RowCount(@subscriberRow) >0 then
 set @subscriberRow=Row(@subscriberRow,1)
 set @firstName=Field(@subscriberRow, "first name", 0)
 endif */
-/* fetch data from Sales Cloud to show in the form */
+/*  */
 
 
   
