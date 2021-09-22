@@ -8,10 +8,10 @@ try{
 
 IF NOT EMPTY(@subscriberkey) THEN
 
- SET @subscriberId =lookup("_subscribers", "SubscriberId", "SubscriberKey", @subscriberkey)
+ /* SET @subscriberId =lookup("_subscribers", "SubscriberId", "SubscriberKey", @subscriberkey)
 
 
-  /* if not Empty(@subscriberId)  then
+  if not Empty(@subscriberId)  then
 
 set @subscriberRows=LookupRows("_EnterpriseAttribute","SubscriberId",@subscriberId)
 if RowCount(@subscriberRow) >0 then
