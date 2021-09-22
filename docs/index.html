@@ -39,9 +39,9 @@ set @rows =lookuprows("_subscribers", "SubscriberKey", @subscriberkey)
   IF RowCount(@rows) > 0 THEN
 
   SET @row = row(@rows,1)
-  
+  /*
   SET @FirstName = field(@row,"SubscriberId")
-
+*/
 
 
 /* fetch data from Sales Cloud to show in the form */
