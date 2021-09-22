@@ -21,7 +21,7 @@ if RowCount(@subscriberRows) >0 then
 set @subscriberRow=Row(@subscriberRows,1)
 set @firstName=Field(@subscriberRow, "first name", 0) 
 set @lastName=Field(@subscriberRow, "last name", 0) 
-set @lastName=Field(@subscriberRow, "email", 0) 
+set @email=Field(@subscriberRow, "email", 0) 
 else
 set @firstName="nodata" 
 endif 
