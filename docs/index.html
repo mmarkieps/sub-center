@@ -39,7 +39,7 @@ set @rows =lookuprows("_subscribers", "SubscriberKey", @subscriberkey)
   IF RowCount(@rows) > 0 THEN
 
   SET @row = row(@rows,1)
-  SET @FirstName = field(@row,"FirstName")
+
 
 
 
