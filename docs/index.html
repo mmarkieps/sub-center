@@ -12,9 +12,9 @@ IF NOT EMPTY(@subscriberkey) THEN
 
 
   if not Empty(@subscriberId)  then
-
-set @subscriberRows=LookupRows("_EnterpriseAttribute","SubscriberID",@subscriberId)
 /* 
+set @subscriberRows=LookupRows("_EnterpriseAttribute","SubscriberID",@subscriberId)
+
 if RowCount(@subscriberRows) >0 then
 
 
