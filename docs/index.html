@@ -1,7 +1,7 @@
 <script runat="server">
 Platform.Load("Core","1.1.1");
 try{
-
+}
 </script>
 
 %%[
@@ -26,7 +26,8 @@ set @email=Field(@subscriberRow, "email", 0)
 
 set @prefcenterRow=Row(@prefcenterRows,1)
 set @newsletter=Field(@prefcenterRow, "newsletter", 0) 
-
+set @events=Field(@prefcenterRow, "events", 0) 
+set @offers=Field(@prefcenterRow, "offers", 0) 
 else
 
 endif 
@@ -38,8 +39,8 @@ endif
    <div>%%=v(@lastName)=%%</div>
    <div>%%=v(@email)=%%</div>
    <div>%%=v(@newsletter)=%%</div>
-   <div>%%=v(@email)=%%</div>
-   <div>%%=v(@email)=%%</div>
+   <div>%%=v(@events)=%%</div>
+   <div>%%=v(@offers)=%%</div>
 <script runat="server">
 }
 catch(e) {
