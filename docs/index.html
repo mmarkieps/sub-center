@@ -2,7 +2,6 @@
 Platform.Load("Core","1.1.1");
 try{
 
-
 </script>
 
 %%[
@@ -17,7 +16,7 @@ if not Empty(@subscriberId)  then
 
 set @subscriberRows=LookupRows("_EnterpriseAttribute","_SubscriberID",@subscriberId)
 set @prefcenterRows=LookupRows("prefcenter","subscriberkey", @subscriberkey)
-if RowCount(@subscriberRows) ==1 and owCount(@subscriberRows) ==1 then
+if RowCount(@subscriberRows) ==1 and RowCount(@prefcenterRows) ==1 then
 
 
 set @subscriberRow=Row(@subscriberRows,1)
