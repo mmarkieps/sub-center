@@ -29,7 +29,7 @@
  <script runat="server">
 Platform.Load("Core","1.1.1");
 try{
-
+}
 </script>
 
 %%[
@@ -69,9 +69,9 @@ endif
    <div>%%=v(@offers)=%%</div>
 
    
-    <form class="align-self-center border border-dark  p-5 m-5">
-      <div class="form-group"> <label>First name: </label><br>
-        <input type="text" name="firstname" value="%%=v(@FirstName)=%%">
+    <form class="align-self-center border border-dark rounded bg-light p-1 p-md-3 m-1 m-md-5 text-center">
+      <div class="form-group col col-12 col-md-6 m-auto"> <label class ="float-left">First name: </label><br>
+        <input class ="w-100" type="text" name="firstname" value="%%=v(@FirstName)=%%">
       </div>
       <div class="form-group">
         <label>Last name: </label>
@@ -81,7 +81,7 @@ endif
 
     
       <input name="submitted" type="hidden" value="true">
-      <input type="submit" value="Submit" class=" btn-dark rounded">
+      <input type="submit" value="Submit" class=" btn-dark rounded align-self-center">
     </form>
     
 
