@@ -27,7 +27,7 @@ set @email=Field(@subscriberRow, "email", 0)
 
 SET @subscriberRows = RetrieveSalesforceObjects(
    "Contact",
-   "Id,FirstName,LastName,Email,Newsletter__c,Events__c,Offers__c,HasOptedOutOfEmail",
+   "Id,FirstName,LastName,Email",
    "Id", "=", @subscriberkey
    )
 else
