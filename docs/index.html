@@ -1,6 +1,8 @@
 <script runat="server">
 Platform.Load("Core","1.1.1");
 try{
+
+
 </script>
 
 %%[
@@ -22,6 +24,12 @@ set @subscriberRow=Row(@subscriberRows,1)
 set @firstName=Field(@subscriberRow, "first name", 0) 
 set @lastName=Field(@subscriberRow, "last name", 0) 
 set @email=Field(@subscriberRow, "email", 0) 
+
+SET @subscriberRows = RetrieveSalesforceObjects(
+   "Contact",
+   "Id,FirstName,LastName,Email,Newsletter__c,Events__c,Offers__c,HasOptedOutOfEmail",
+   "Id", "=", @subscriberkey
+   )
 else
 set @firstName="nodata" 
 endif 
@@ -39,7 +47,7 @@ catch(e) {
 }
 </script>
 
- <span>%%=v(@errorMessage)=%%</span>
+
 <script runat="client">
 console.log(`%%=v(@errorMessage)=%%`);
 console.log('<ctrl:var name="myVar" />');
