@@ -29,7 +29,7 @@
  <script runat="server">
 Platform.Load("Core","1.1.1");
 try{
-
+}
 </script>
 
 %%[
@@ -57,6 +57,10 @@ set @hasOptedOut=Field(@prefcenterRow, "hasOptedOut", 0)
 set @newsletter=Field(@prefcenterRow, "newsletter", 0) 
 set @events=Field(@prefcenterRow, "events", 0) 
 set @offers=Field(@prefcenterRow, "offers", 0) 
+
+set @newsletterChk=""
+set @eventsChk=""
+set @offersChk=""
 endif
  ]%%
   <div>%%=v(@subscriberId)=%%</div>
