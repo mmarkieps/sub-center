@@ -57,6 +57,10 @@ set @offers=Field(@prefcenterRow, "offers", 0)
 set @newsletterChk=""
 set @eventsChk=""
 set @offersChk=""
+
+  IF @Newsletter == true THEN SET @Newsletterchk = "checked" ENDIF
+  IF @Events == true THEN SET @Eventschk = "checked" ENDIF
+  IF @Offers == true THEN SET @Offerschk = "checked" ENDIF
 endif
  ]%%
   <div>%%=v(@subscriberId)=%%</div>
@@ -80,10 +84,10 @@ endif
       <div class="form-group"> <label>Email: </label><br><input type="text" name="email" value="%%=v(@Email)=%%"></div>
 
       <div class="form-check">
-        <label>Newsletter: </label><input name="newsletter" type="checkbox" %%=v(@Newsletterchk)=%%><br>
-        <label>Events: </label><input name="events" type="checkbox" ><br>
-        <label>Offers: </label><input name="offers" type="checkbox" ><br>
-        </div>
+      <label>Newsletter: </label><input name="newsletter" type="checkbox" %%=v(@Newsletterchk)=%%><br>
+      <label>Events: </label><input name="events" type="checkbox" %%=v(@Eventschk)=%%><br>
+      <label>Offers: </label><input name="offers" type="checkbox" %%=v(@Offerschk)=%%><br>
+      </div>
       <input name="submitted" type="hidden" value="true">
       <input type="submit" value="Submit" class=" btn-dark rounded align-self-center">
     </form>
