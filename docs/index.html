@@ -26,11 +26,7 @@
   </header>
   <section class="text-center  d-flex flex-column align-items-center justify-content-center">
 
- <script runat="server">
-Platform.Load("Core","1.1.1");
-try{
 
-</script>
 
 %%[
 SET @subscriberkey= _subscriberkey
@@ -104,18 +100,7 @@ Sorry, something went wrong (missing subscriber key).
   
     
 %%[ENDIF]%% 
-<script runat="server">
-}
-catch(e) {
- Variable.SetValue("errorMessage", "msg: " + Stringify(e.message) + Stringify(e.description));
-}
-</script>
 
-
-<script runat="client">
-console.log(`%%=v(@errorMessage)=%%`);
-console.log('<ctrl:var name="myVar" />');
-</script>
     
     
   </section>
