@@ -7,7 +7,7 @@
 <body>
 %%[
     SET @origin = HTTPRequestHeader("Referer")
-    set url= CloudPagesURL(7786)   
+    set @url= CloudPagesURL(7786)   
     SET @pattern =Substring(@url,1, Subtract(IndexOf(@url,"?"),1))
     SET @match = RegExMatch(@origin, @pattern, 1)
 ]%%
