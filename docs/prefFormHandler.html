@@ -39,7 +39,9 @@ console.log("%%=v(@match)=%%")
 
 IF LENGTH(@match) > 0 THEN  
 
-   
+   SET @subscriberkey= _subscriberkey
+
+IF NOT EMPTY(@subscriberkey) THEN
 set @firstName=RequestParameter("email")
 set @lastName=RequestParameter("firstname")
 set @email=RequestParameter("lastname")
@@ -50,15 +52,12 @@ set @newsletter=Iif(RequestParameter("newsletter") == "on", "true", "false")
 set @events=Iif(RequestParameter("events") == "on", "true", "false")
 set @offers=Iif(RequestParameter("offers") == "on", "true", "false")
 
- 
+ UpsertData("prefcenter",1, "SubscriberKey",@subscriberkey, "HasOptedOut",@hasOptedOut,
+  "Newsletter", @newslette, "Events",@events, "Offers", @offers)
 
-
-    IF NOT EMPTY(@email) THEN
-        /* Redirect(CONCAT(CloudPagesURL(7786,'Success',1))) */
-    ENDIF
 
 ENDIF
-
+endif
 ]%%
 
 </body>
