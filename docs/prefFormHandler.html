@@ -40,15 +40,15 @@ console.log("%%=v(@match)=%%")
 IF LENGTH(@match) > 0 THEN  
 
    
-set @firstName=Field(@subscriberRow, "first name", 0) 
-set @lastName=Field(@subscriberRow, "last name", 0) 
-set @email=RequestParameter("email")
+set @firstName=RequestParameter("email")
+set @lastName=RequestParameter("firstname")
+set @email=RequestParameter("lastname")
 
-set @prefcenterRow=Row(@prefcenterRows,1)
-set @hasOptedOut=Field(@prefcenterRow, "hasOptedOut", 0) 
-set @newsletter=Field(@prefcenterRow, "newsletter", 0) 
-set @events=Field(@prefcenterRow, "events", 0) 
-set @offers=Field(@prefcenterRow, "offers", 0) 
+
+set @hasOptedOut=Iif(RequestParameter("hasoptedout") == "on", "true", "false")
+set @newsletter=Iif(RequestParameter("newsletter") == "on", "true", "false")
+set @events=Iif(RequestParameter("events") == "on", "true", "false")
+set @offers=Iif(RequestParameter("offers") == "on", "true", "false")
 
  
 
