@@ -52,13 +52,20 @@ set @newsletter=Iif(RequestParameter("newsletter") == "on", "true", "false")
 set @events=Iif(RequestParameter("events") == "on", "true", "false")
 set @offers=Iif(RequestParameter("offers") == "on", "true", "false")
 
- UpsertData("prefcenter",1, "SubscriberKey",@subscriberkey, "HasOptedOut",@hasOptedOut,
+ set @rowsAffected=UpsertData("prefcenter",1, "SubscriberKey",@subscriberkey, "HasOptedOut",@hasOptedOut,
   "Newsletter", @newslette, "Events",@events, "Offers", @offers)
+if @rowsAffected==1 then
+    set @resultMessage="Success"
 
+else
+    /* do nothing */
+endif
 
 ENDIF
 endif
 ]%%
-
+<div>
+%%=v(@resultMessage)=%%
+</div>
 </body>
 </html>
