@@ -11,7 +11,7 @@
     set @url= CloudPagesURL(7786)  
     /* Substring(@url,1, Subtract(IndexOf(@url,"?"),1))  */
     SET @pattern =Concat("^","http",".*")
-    SET @match = RegExMatch(@origin, @pattern, 1)
+    SET @match = RegExMatch(@origin, @pattern, 0)
 
 ]%%
 <script>
