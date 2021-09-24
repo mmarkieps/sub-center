@@ -7,15 +7,18 @@
 <body>
 %%[
     SET @origin = HTTPRequestHeader("Referer")
-    SET @pattern = "^(https:\/\/(.*\.)?((pub.s10.exacttarget)\.com))($|\/)"
+    SET @pattern = "^(%%=CloudPagesURL(7786)=%%))($|\/)"
     SET @match = RegExMatch(@origin, @pattern, 1)
 ]%%
+<script>
+console.log("%%=CloudPagesURL(7786)=%%")
+</script>
 <script runat="server">
     Platform.Load("core","1");
     var MATCH = Variable.GetValue("@match");
     if (!MATCH) { MATCH = null }
     HTTPHeader.SetValue("Access-Control-Allow-Methods","POST");
-    
+    HTTPHeader.SetValue("Access-Control-Allow-Origin",MATCH);
    Platform.Response.SetResponseHeader("Strict-Transport-Security","max-age=200");
    Platform.Response.SetResponseHeader("X-XSS-Protection","1; mode=block");
    Platform.Response.SetResponseHeader("X-Frame-Options","Deny");
@@ -23,6 +26,7 @@
    Platform.Response.SetResponseHeader("Referrer-Policy","strict-origin-when-cross-origin");
    Platform.Response.SetResponseHeader("Content-Security-Policy","default-src 'self'");
 </script>
+
 %%[
 
 
