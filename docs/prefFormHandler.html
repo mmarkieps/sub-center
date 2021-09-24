@@ -7,11 +7,12 @@
 <body>
 %%[
     SET @origin = HTTPRequestHeader("Referer")
-    SET @pattern = "^(%%=CloudPagesURL(7786)=%%))($|\/)"
+    SET @pattern = CloudPagesURL(7786)
     SET @match = RegExMatch(@origin, @pattern, 1)
 ]%%
 <script>
 console.log("%%=CloudPagesURL(7786)=%%")
+console.log("%%=@pattern=%%")
 </script>
 <script runat="server">
     Platform.Load("core","1");
