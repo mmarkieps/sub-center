@@ -8,12 +8,13 @@
 %%[
     SET @origin = HTTPRequestHeader("Referer")
     set @url= CloudPagesURL(7786)   
-    SET @pattern =Substring(@url,1, Subtract(IndexOf(@url,"?"),1))
+    SET @pattern =Concat("^",Substring(@url,1, Subtract(IndexOf(@url,"?"),1)))
     SET @match = RegExMatch(@origin, @pattern, 1)
 ]%%
 <script>
 console.log("%%=v(@origin)=%%")
 console.log("%%=v(@pattern)=%%")
+console.log("%%=v(@match)=%%")
 </script>
 <script runat="server">
     Platform.Load("core","1");
