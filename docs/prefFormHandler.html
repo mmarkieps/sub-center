@@ -13,7 +13,7 @@
 <script runat="server">
     Platform.Load("core","1");
     var MATCH = Variable.GetValue("@match");
-    if (!MATCH) { MATCH = null, }
+    if (!MATCH) { MATCH = null }
     HTTPHeader.SetValue("Access-Control-Allow-Methods","POST");
     
    Platform.Response.SetResponseHeader("Strict-Transport-Security","max-age=200");
