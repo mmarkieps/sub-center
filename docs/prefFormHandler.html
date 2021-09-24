@@ -7,7 +7,8 @@
 <body>
 %%[
     SET @origin = HTTPRequestHeader("Referer")
-    SET @pattern = CloudPagesURL(7786)
+    set url= CloudPagesURL(7786)   
+    SET @pattern =Substring(@url,1, Subtract(IndexOf(@url,"?"),1))
     SET @match = RegExMatch(@origin, @pattern, 1)
 ]%%
 <script>
@@ -19,7 +20,7 @@ console.log("%%=v(@pattern)=%%")
     var MATCH = Variable.GetValue("@match");
     if (!MATCH) { MATCH = null }
     HTTPHeader.SetValue("Access-Control-Allow-Methods","POST");
-    HTTPHeader.SetValue("Access-Control-Allow-Origin",MATCH);
+    /* HTTPHeader.SetValue("Access-Control-Allow-Origin",MATCH); */
    Platform.Response.SetResponseHeader("Strict-Transport-Security","max-age=200");
    Platform.Response.SetResponseHeader("X-XSS-Protection","1; mode=block");
    Platform.Response.SetResponseHeader("X-Frame-Options","Deny");
