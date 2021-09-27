@@ -56,12 +56,18 @@ set @offers=Iif(RequestParameter("offers") == "on", "true", "false")
   "Newsletter", @newslette, "Events",@events, "Offers", @offers)
 
 
- IF RequestParameter("unsubAll") != "on" THEN
-/* Set the correct status in All subscribers, run UnsubEvent, provide the reason for unsubscribing */
-
-    SET @Subscriber = CreateObject("Subscriber")
+   SET @Subscriber = CreateObject("Subscriber")
     SetObjectProperty(@Subscriber, "SubscriberKey", @subscriberKey)
     SetObjectProperty(@Subscriber, "EmailAddress", @email)
+
+
+
+/* 
+
+ IF RequestParameter("unsubAll") != "on" THEN
+
+
+ 
     SetObjectProperty(@Subscriber, "Status", "Active" )
     SET @Status = InvokeUpdate(@Subscriber, @createErrDesc, @createErrNo, @createOpts)
     
@@ -80,7 +86,7 @@ set @offers=Iif(RequestParameter("offers") == "on", "true", "false")
     SETObjectProperty(@lue_prop, "Value", "Unsubscribed through custom subscription center")
     AddObjectArrayItem(@lue, "Parameters", @lue_prop)
     
-/*Update the unsubscribe from all list*/
+
     SET @ll_sub = CreateObject("Subscriber")
 
     SetObjectProperty(@ll_sub,"EmailAddress", @email)
@@ -93,9 +99,11 @@ set @offers=Iif(RequestParameter("offers") == "on", "true", "false")
     SetObjectProperty(@save,"PropertyName","Status")
     AddObjectArrayItem(@options,"SaveOptions", @save)
 
-/* Here is where we actually update the Subscriber object */
+
     SET @lue_statusCode = InvokeExecute(@lue, @overallStatus, @requestId)
     SET @update_sub = InvokeUpdate(@ll_sub, @update_sub_status, @update_sub_errorcode, @options)
+    
+     */
 
 if @rowsAffected==1 then
     set @resultMessage="Success"
@@ -107,6 +115,11 @@ endif
 ENDIF
 endif
 ]%%
+
+%%=v(RequestParameter("unsubscribe"))=%%
+
+
+
 <div>
 %%=v(@resultMessage)=%%
 </div>
