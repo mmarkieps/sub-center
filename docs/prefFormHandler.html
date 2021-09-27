@@ -6,13 +6,11 @@
 </head>
 <body>
 %%[
-    
     SET @origin = HTTPRequestHeader("Referer")
-    set @url= CloudPagesURL(7786)  
+    SET @url = CloudPagesURL(7786)
     /*   */
-    SET @pattern =Concat("^",Substring(@url,1, Subtract(IndexOf(@url,"?"),1)),".*")
+    SET @pattern = Concat("^", Substring(@url, 1, Subtract(IndexOf(@url, "?"), 1)), ".*")
     SET @match = RegExMatch(@origin, @pattern, 0)
-
 ]%%
 <script>
 console.log("%%=v(@origin)=%%")
@@ -32,90 +30,83 @@ console.log("%%=v(@match)=%%")
    Platform.Response.SetResponseHeader("Referrer-Policy","strict-origin-when-cross-origin");
    Platform.Response.SetResponseHeader("Content-Security-Policy","default-src 'self'");
 </script>
-
 %%[
-
-
-
-IF LENGTH(@match) > 0 THEN  
-
-   SET @subscriberkey= _subscriberkey
-
-IF NOT EMPTY(@subscriberkey) THEN
-set @firstName=RequestParameter("email")
-set @lastName=RequestParameter("firstname")
-set @email=RequestParameter("lastname")
-
-
-set @hasOptedOut=Iif(RequestParameter("hasoptedout") == "on", "true", "false")
-set @newsletter=Iif(RequestParameter("newsletter") == "on", "true", "false")
-set @events=Iif(RequestParameter("events") == "on", "true", "false")
-set @offers=Iif(RequestParameter("offers") == "on", "true", "false")
-
- set @rowsAffected=UpsertData("prefcenter",1, "SubscriberKey",@subscriberkey, "HasOptedOut",@hasOptedOut,
-  "Newsletter", @newslette, "Events",@events, "Offers", @offers)
-
-
-   SET @Subscriber = CreateObject("Subscriber")
-    SetObjectProperty(@Subscriber, "SubscriberKey", @subscriberKey)
-    SetObjectProperty(@Subscriber, "EmailAddress", @email)
-
-
-
-/* 
-
- IF RequestParameter("unsubAll") != "on" THEN
-
-
- 
-    SetObjectProperty(@Subscriber, "Status", "Active" )
-    SET @Status = InvokeUpdate(@Subscriber, @createErrDesc, @createErrNo, @createOpts)
+    IF LENGTH(@match) > 0 THEN
+        SET @subscriberkey = _subscriberkey
+        IF NOT EMPTY(@subscriberkey) THEN
+            IF RequestParameter("update") THEN
+                SET @firstName = RequestParameter("firstname")
+                SET @lastName = RequestParameter("lastname")
+                SET @email = RequestParameter("email")
+                SET @newsletter = Iif(RequestParameter("newsletter") == "on", "true", "false")
+                SET @events = Iif(RequestParameter("events") == "on", "true", "false")
+                SET @offers = Iif(RequestParameter("offers") == "on", "true", "false")
+                SET @rowsAffected = UpsertData(
+                    "prefcenter",
+                    1,
+                    "SubscriberKey",
+                    @subscriberkey,
+                    "Newsletter",
+                    @newslette,
+                    "Events",
+                    @events,
+                    "Offers",
+                    @offers
+                )
+                SET @Subscriber = CreateObject("Subscriber")
+                SetObjectProperty(@Subscriber, "SubscriberKey", @subscriberKey)
+                SetObjectProperty(@Subscriber, "EmailAddress", @email)
+                IF @rowsAffected==1 THEN
+                    SET @resultMessage = "Success"
+                ELSE
+                    SET @resultMessage = "Sorry, something went wrong."
+                ENDIF
+            ENDIF
+        ENDIF
+    ENDIF
+    /*
     
-   ELSEIF RequestParameter("unsubAll") == "on" THEN
-    
-    SET @lue = CreateObject("ExecuteRequest")
-    SETObjectProperty(@lue,"Name","LogUnsubEvent")
-
-    SET @lue_prop = CreateObject("APIProperty")
-    SETObjectProperty(@lue_prop, "Name", "SubscriberKey")
-    SETObjectProperty(@lue_prop, "Value", @subscriberKey)
-    AddObjectArrayItem(@lue, "Parameters", @lue_prop)
-   
-    SET @lue_prop = CreateObject("APIProperty")
-    SETObjectProperty(@lue_prop, "Name", "Reason")
-    SETObjectProperty(@lue_prop, "Value", "Unsubscribed through custom subscription center")
-    AddObjectArrayItem(@lue, "Parameters", @lue_prop)
-    
-
-    SET @ll_sub = CreateObject("Subscriber")
-
-    SetObjectProperty(@ll_sub,"EmailAddress", @email)
-    SetObjectProperty(@ll_sub,"SubscriberKey", @subscriberKey)
-
-    SetObjectProperty(@ll_sub,"Status","Unsubscribed")
-    Set @options = CreateObject("UpdateOptions")
-    Set @save = CreateObject("SaveOption")
-    SetObjectProperty(@save,"SaveAction","UpdateAdd")
-    SetObjectProperty(@save,"PropertyName","Status")
-    AddObjectArrayItem(@options,"SaveOptions", @save)
-
-
-    SET @lue_statusCode = InvokeExecute(@lue, @overallStatus, @requestId)
-    SET @update_sub = InvokeUpdate(@ll_sub, @update_sub_status, @update_sub_errorcode, @options)
-    
-     */
-
-if @rowsAffected==1 then
-    set @resultMessage="Success"
-
-else
-    set @resultMessage="Sorry, something went wrong."
-endif
-
-ENDIF
-endif
+    IF RequestParameter("unsubAll") != "on" THEN
+        
+        
+        
+        SetObjectProperty(@Subscriber, "Status", "Active" )
+        SET @Status = InvokeUpdate(@Subscriber, @createErrDesc, @createErrNo, @createOpts)
+        
+    ELSEIF RequestParameter("unsubAll") == "on" THEN
+        
+        SET @lue = CreateObject("ExecuteRequest")
+        SETObjectProperty(@lue,"Name","LogUnsubEvent")
+        
+        SET @lue_prop = CreateObject("APIProperty")
+        SETObjectProperty(@lue_prop, "Name", "SubscriberKey")
+        SETObjectProperty(@lue_prop, "Value", @subscriberKey)
+        AddObjectArrayItem(@lue, "Parameters", @lue_prop)
+        
+        SET @lue_prop = CreateObject("APIProperty")
+        SETObjectProperty(@lue_prop, "Name", "Reason")
+        SETObjectProperty(@lue_prop, "Value", "Unsubscribed through custom subscription center")
+        AddObjectArrayItem(@lue, "Parameters", @lue_prop)
+        
+        
+        SET @ll_sub = CreateObject("Subscriber")
+        
+        SetObjectProperty(@ll_sub,"EmailAddress", @email)
+        SetObjectProperty(@ll_sub,"SubscriberKey", @subscriberKey)
+        
+        SetObjectProperty(@ll_sub,"Status","Unsubscribed")
+        SET @options = CreateObject("UpdateOptions")
+        SET @save = CreateObject("SaveOption")
+        SetObjectProperty(@save,"SaveAction","UpdateAdd")
+        SetObjectProperty(@save,"PropertyName","Status")
+        AddObjectArrayItem(@options,"SaveOptions", @save)
+        
+        
+        SET @lue_statusCode = InvokeExecute(@lue, @overallStatus, @requestId)
+        SET @update_sub = InvokeUpdate(@ll_sub, @update_sub_status, @update_sub_errorcode, @options)
+        
+        */
 ]%%
-
 %%=v(RequestParameter("unsubscribe"))=%%
 
 
