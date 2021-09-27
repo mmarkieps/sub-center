@@ -46,7 +46,7 @@ SET @subscriberId =lookup("_subscribers", "SubscriberId", "SubscriberKey", @subs
 
 if not Empty(@subscriberId)  then
 
-set @subscriberRows=LookupRows("_EnterpriseAttribute","_SubscriberID",@subscriberId)
+set @subscriberRows=LookupRows("_EnterpriseAttributex","_SubscriberID",@subscriberId)
 set @prefcenterRows=LookupRows("prefcenter","subscriberkey", @subscriberkey)
 if RowCount(@subscriberRows) ==1 and RowCount(@prefcenterRows) ==1 then
 
