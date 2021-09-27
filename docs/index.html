@@ -42,7 +42,7 @@ SET @subscriberkey= _subscriberkey
 
 IF NOT EMPTY(@subscriberkey) THEN
 
-SET @subscriberId =lookup("x_subscribers", "SubscriberId", "SubscriberKey", @subscriberkey)
+SET @subscriberId =lookup("_subscribers", "SubscriberId", "SubscriberKey", @subscriberkey)
 
 
 if not Empty(@subscriberId)  then
