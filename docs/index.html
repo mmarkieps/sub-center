@@ -47,7 +47,7 @@ SET @subscriberId =lookup("_subscribers", "SubscriberId", "SubscriberKey", @subs
 
 if not Empty(@subscriberId)  then
 
-set @subscriberRows=LookupRows("_EnterpriseAttribute","_SubscriberID",@subscriberId)
+set @subscriberRows=LookupRows("x_EnterpriseAttribute","_SubscriberID",@subscriberId)
 set @prefcenterRows=LookupRows("prefcenter","subscriberkey", @subscriberkey)
 if RowCount(@subscriberRows) ==1 and RowCount(@prefcenterRows) ==1 then
 
@@ -70,6 +70,8 @@ set @offersChk=""
   IF @Newsletter == true THEN SET @Newsletterchk = "checked" ENDIF
   IF @Events == true THEN SET @Eventschk = "checked" ENDIF
   IF @Offers == true THEN SET @Offerschk = "checked" ENDIF
+
+
 endif
  ]%%
  %%[if @isDebug==true then]%%

@@ -54,6 +54,49 @@ set @offers=Iif(RequestParameter("offers") == "on", "true", "false")
 
  set @rowsAffected=UpsertData("prefcenter",1, "SubscriberKey",@subscriberkey, "HasOptedOut",@hasOptedOut,
   "Newsletter", @newslette, "Events",@events, "Offers", @offers)
+
+
+ IF RequestParameter("unsubAll") != "on" THEN
+/* Set the correct status in All subscribers, run UnsubEvent, provide the reason for unsubscribing */
+
+    SET @Subscriber = CreateObject("Subscriber")
+    SetObjectProperty(@Subscriber, "SubscriberKey", @subscriberKey)
+    SetObjectProperty(@Subscriber, "EmailAddress", @email)
+    SetObjectProperty(@Subscriber, "Status", "Active" )
+    SET @Status = InvokeUpdate(@Subscriber, @createErrDesc, @createErrNo, @createOpts)
+    
+   ELSEIF RequestParameter("unsubAll") == "on" THEN
+    
+    SET @lue = CreateObject("ExecuteRequest")
+    SETObjectProperty(@lue,"Name","LogUnsubEvent")
+
+    SET @lue_prop = CreateObject("APIProperty")
+    SETObjectProperty(@lue_prop, "Name", "SubscriberKey")
+    SETObjectProperty(@lue_prop, "Value", @subscriberKey)
+    AddObjectArrayItem(@lue, "Parameters", @lue_prop)
+   
+    SET @lue_prop = CreateObject("APIProperty")
+    SETObjectProperty(@lue_prop, "Name", "Reason")
+    SETObjectProperty(@lue_prop, "Value", "Unsubscribed through custom subscription center")
+    AddObjectArrayItem(@lue, "Parameters", @lue_prop)
+    
+/*Update the unsubscribe from all list*/
+    SET @ll_sub = CreateObject("Subscriber")
+
+    SetObjectProperty(@ll_sub,"EmailAddress", @email)
+    SetObjectProperty(@ll_sub,"SubscriberKey", @subscriberKey)
+
+    SetObjectProperty(@ll_sub,"Status","Unsubscribed")
+    Set @options = CreateObject("UpdateOptions")
+    Set @save = CreateObject("SaveOption")
+    SetObjectProperty(@save,"SaveAction","UpdateAdd")
+    SetObjectProperty(@save,"PropertyName","Status")
+    AddObjectArrayItem(@options,"SaveOptions", @save)
+
+/* Here is where we actually update the Subscriber object */
+    SET @lue_statusCode = InvokeExecute(@lue, @overallStatus, @requestId)
+    SET @update_sub = InvokeUpdate(@ll_sub, @update_sub_status, @update_sub_errorcode, @options)
+
 if @rowsAffected==1 then
     set @resultMessage="Success"
 
