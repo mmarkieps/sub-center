@@ -40,47 +40,59 @@
     <h1 class="">lorem ipsum</h1>
   </header>
   <section class="text-center  d-flex flex-column align-items-center justify-content-center">
-    %%[
-    SET @isDebug = true
-    SET @subscriberkey = _subscriberkey
-    IF NOT EMPTY(@subscriberkey) THEN
+%%[
+  SET @success = RequestParameter("Success")
+  IF not Empty(@success) THEN
+    IF @Success == 1 THEN
+      SET @resultMessage = "Success"
+    ELSE
+      SET @resultMessage = "Sorry, something went wrong."
+    ENDIF
+]%%
+
+%%[ ENDIF ]%%
+
+%%[
+  SET @isDebug = true
+  SET @subscriberkey = _subscriberkey
+  IF NOT EMPTY(@subscriberkey) THEN
     SET @subscriberId = lookup("_subscribers", "SubscriberId", "SubscriberKey", @subscriberkey)
     IF not Empty(@subscriberId) THEN
-    SET @status = lookup("_subscribers", "Status", "SubscriberKey", @subscriberkey)
-    SET @subscriberRows = LookupRows("_EnterpriseAttribute", "_SubscriberID", @subscriberId)
-    SET @prefcenterRows = LookupRows("prefcenter", "subscriberkey", @subscriberkey)
-    IF RowCount(@subscriberRows) ==1 AND RowCount(@prefcenterRows) ==1 THEN
-    SET @subscriberRow = Row(@subscriberRows, 1)
-    SET @firstName = Field(@subscriberRow, "first name", 0)
-    SET @lastName = Field(@subscriberRow, "last name", 0)
-    SET @email = Field(@subscriberRow, "email", 0)
-    SET @prefcenterRow = Row(@prefcenterRows, 1)
-    SET @hasOptedOut = Field(@prefcenterRow, "hasOptedOut", 0)
-    SET @newsletter = Field(@prefcenterRow, "newsletter", 0)
-    SET @events = Field(@prefcenterRow, "events", 0)
-    SET @offers = Field(@prefcenterRow, "offers", 0)
-    SET @newsletterChk = ""
-    SET @eventsChk = ""
-    SET @offersChk = ""
-    IF @status == 'Active' THEN
-    SET @hasOptedOut = false
-    ELSE
-    @hasOptedOut=true
-    ENDIF
-    IF @Newsletter == true THEN
-    SET @Newsletterchk = "checked"
-    ENDIF
-    IF @Events == true THEN
-    SET @Eventschk = "checked"
-    ENDIF
-    IF @Offers == true THEN
-    SET @Offerschk = "checked"
-    ENDIF
-    ENDIF
-    ]%%
+      SET @status = lookup("_subscribers", "Status", "SubscriberKey", @subscriberkey)
+      SET @subscriberRows = LookupRows("_EnterpriseAttribute", "_SubscriberID", @subscriberId)
+      SET @prefcenterRows = LookupRows("prefcenter", "subscriberkey", @subscriberkey)
+      IF RowCount(@subscriberRows) ==1 AND RowCount(@prefcenterRows) ==1 THEN
+        SET @subscriberRow = Row(@subscriberRows, 1)
+        SET @firstName = Field(@subscriberRow, "first name", 0)
+        SET @lastName = Field(@subscriberRow, "last name", 0)
+        SET @email = Field(@subscriberRow, "email", 0)
+        SET @prefcenterRow = Row(@prefcenterRows, 1)
+        SET @hasOptedOut = Field(@prefcenterRow, "hasOptedOut", 0)
+        SET @newsletter = Field(@prefcenterRow, "newsletter", 0)
+        SET @events = Field(@prefcenterRow, "events", 0)
+        SET @offers = Field(@prefcenterRow, "offers", 0)
+        SET @newsletterChk = ""
+        SET @eventsChk = ""
+        SET @offersChk = ""
+        IF @status == 'Active' THEN
+          SET @hasOptedOut = false
+        ELSE
+          @hasOptedOut=true
+        ENDIF
+        IF @Newsletter == true THEN
+          SET @Newsletterchk = "checked"
+        ENDIF
+        IF @Events == true THEN
+          SET @Eventschk = "checked"
+        ENDIF
+        IF @Offers == true THEN
+          SET @Offerschk = "checked"
+        ENDIF
+      ENDIF
+]%%
 
     %%[ IF @isDebug==true THEN ]%%
-    <div>%%=v(@subscriberId)=%%</div>
+<div>%%=v(@subscriberId)=%%</div>
     <div>%%=v(@firstName)=%%</div>
     <div>%%=v(@lastName)=%%</div>
     <div>%%=v(@email)=%%</div>
@@ -90,9 +102,12 @@
     <div>%%=v(@offers)=%%</div>
     <div>status %%=v(@status)=%%</div>
     %%[ ENDIF ]%%
-
+ <div
+      class=" border border-dark rounded bg-light p-1 p-md-3 m-1 mt-md-1 mr-md-5 ml-md-5 mb-md-5 col col-11 col-md-6 text-center">
+%%=v(@success)=%%
+      </div>
     %%[ IF @hasOptedOut==false THEN ]%%
-    <form method="post" action="%%=CloudPagesURL(7825)=%%"
+<form method="post" action="%%=CloudPagesURL(7825)=%%"
       class=" border border-dark rounded bg-light p-1 p-md-3 m-1 m-md-5 col col-11 col-md-6 text-center">
       <div class="form-group col col-12 col-md-6 m-auto"> <label class="float-left">First name: </label><br>
         <input class="w-100" type="text" name="firstname" value="%%=v(@FirstName)=%%">
@@ -126,7 +141,7 @@
       <input type="submit" value="Unsubscribe" class=" btn-dark rounded align-self-center">
     </form>
     %%[ ELSE ]%%
-    <form method="post" action="%%=CloudPagesURL(7825)=%%"
+<form method="post" action="%%=CloudPagesURL(7825)=%%"
       class=" border border-dark rounded bg-light p-1 p-md-3  m-1 m-md-5  col col-11 col-md-6 text-center">
       <h6>
         Click button below if you want to subscribe to marketing communication.
@@ -136,15 +151,15 @@
     </form>
     %%[ ENDIF ]%%
 
-    %%[ ELSE ]%%
-    Sorry, something went wrong (no records found).
+  %%[ ELSE ]%%
+Sorry, something went wrong (no records found).
     %%[
     ENDIF
-    ELSE
+  ELSE
     ]%%
-    Sorry, something went wrong (missing subscriber key).
-    %%[ ENDIF ]%%
-  </section>
+Sorry, something went wrong (missing subscriber key).
+%%[ ENDIF ]%%
+</section>
 
 
   <footer class="text-center bg-dark text-white h-25 d-flex align-items-center justify-content-center">
