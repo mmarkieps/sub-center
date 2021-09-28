@@ -65,6 +65,21 @@ console.log("%%=v(@match)=%%")
                     "HasOptedOut",
                     "true"
                 )
+            ELSEIF RequestParameter("subscribe") THEN
+                SET @rowsAffected = UpsertData(
+                    "prefcenter",
+                    1,
+                    "SubscriberKey",
+                    @subscriberkey,
+                    "HasOptedOut",
+                    "true",
+                    "Newsletter",
+                    "true",
+                    "Events",
+                    "true",
+                    "Offers",
+                    "true"
+                )
             ENDIF
             IF @rowsAffected==1 THEN
                 SET @resultMessage = "Success"
