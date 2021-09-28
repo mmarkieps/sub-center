@@ -101,6 +101,11 @@ console.log("%%=v(@match)=%%")
                     "Offers",
                     "true"
                 )
+                SET @Subscriber = CreateObject("Subscriber")
+                SetObjectProperty(@Subscriber, "SubscriberKey", @subscriberKey)
+                SetObjectProperty(@Subscriber, "EmailAddress", @email)
+                SetObjectProperty(@Subscriber, "Status", "Active")
+                SET @Status = InvokeUpdate(@Subscriber, @createErrDesc, @createErrNo, @createOpts)
             ENDIF
             IF @rowsAffected==1 THEN
                 SET @resultMessage = "Success"
