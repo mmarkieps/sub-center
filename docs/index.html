@@ -15,7 +15,9 @@
             position: relative;
             bottom: 1px;
         }
-          
+          header, footer{
+            height: 17%;
+          }
     
 
       </style>
@@ -36,7 +38,7 @@
 
 
 
-  <header class="text-center bg-dark text-white h-25 d-flex align-items-center justify-content-center">
+  <header class="text-center bg-dark text-white  d-flex align-items-center justify-content-center">
     <h1 class="">lorem ipsum</h1>
   </header>
   <section class="text-center  d-flex flex-column align-items-center justify-content-center">
@@ -49,7 +51,10 @@
       SET @resultMessage = "Sorry, something went wrong."
     ENDIF
 ]%%
-
+ <div
+      class=" border border-dark rounded bg-light p-1 p-md-3 m-1 mt-md-1 mr-md-5 ml-md-5 mb-md-5 col col-11 col-md-6 text-center">
+%%=v(@success)=%%
+      </div>
 %%[ ENDIF ]%%
 
 %%[
@@ -102,10 +107,7 @@
     <div>%%=v(@offers)=%%</div>
     <div>status %%=v(@status)=%%</div>
     %%[ ENDIF ]%%
- <div
-      class=" border border-dark rounded bg-light p-1 p-md-3 m-1 mt-md-1 mr-md-5 ml-md-5 mb-md-5 col col-11 col-md-6 text-center">
-%%=v(@success)=%%
-      </div>
+
     %%[ IF @hasOptedOut==false THEN ]%%
 <form method="post" action="%%=CloudPagesURL(7825)=%%"
       class=" border border-dark rounded bg-light p-1 p-md-3 m-1 m-md-5 col col-11 col-md-6 text-center">
@@ -162,7 +164,7 @@ Sorry, something went wrong (missing subscriber key).
 </section>
 
 
-  <footer class="text-center bg-dark text-white h-25 d-flex align-items-center justify-content-center">
+  <footer class="text-center bg-dark text-white  d-flex align-items-center justify-content-center">
     <div>
       ©mm
     </div>
