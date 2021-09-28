@@ -35,6 +35,8 @@
   IF NOT EMPTY(@subscriberkey) THEN
     SET @subscriberId = lookup("_subscribers", "SubscriberId", "SubscriberKey", @subscriberkey)
     IF not Empty(@subscriberId) THEN
+    
+    SET @status = lookup("_subscribers", "Status", "SubscriberKey", @subscriberkey)
       SET @subscriberRows = LookupRows("_EnterpriseAttribute", "_SubscriberID", @subscriberId)
       SET @prefcenterRows = LookupRows("prefcenter", "subscriberkey", @subscriberkey)
       IF RowCount(@subscriberRows) ==1 AND RowCount(@prefcenterRows) ==1 THEN
@@ -42,7 +44,7 @@
         SET @firstName = Field(@subscriberRow, "first name", 0)
         SET @lastName = Field(@subscriberRow, "last name", 0)
         SET @email = Field(@subscriberRow, "email", 0)
-  SET @status = Field(@subscriberRow, "status", 0)
+  
 
         SET @prefcenterRow = Row(@prefcenterRows, 1)
         SET @hasOptedOut = Field(@prefcenterRow, "hasOptedOut", 0)
