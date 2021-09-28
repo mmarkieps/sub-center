@@ -58,7 +58,7 @@
 %%[ ENDIF ]%%
 
 %%[
-  SET @isDebug = true
+  SET @isDebug = false
   SET @subscriberkey = _subscriberkey
   IF NOT EMPTY(@subscriberkey) THEN
     SET @subscriberId = lookup("_subscribers", "SubscriberId", "SubscriberKey", @subscriberkey)
