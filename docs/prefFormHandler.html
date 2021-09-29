@@ -51,7 +51,13 @@ console.log("%%=v(@match)=%%")
                     "Events",
                     @events,
                     "Offers",
-                    @offers
+                    @offers,
+                    "Email",
+                    @email,
+                    "FirstName",
+                    @firstName,
+                    "LastName",
+                    @lastName
                 )
                 SET @Subscriber = CreateObject("Subscriber")
                 SetObjectProperty(@Subscriber, "SubscriberKey", @subscriberKey)
