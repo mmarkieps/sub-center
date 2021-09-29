@@ -40,7 +40,7 @@
   </header>
   <section class="text-center  d-flex flex-column align-items-center justify-content-center">
 
-  %%=v(@success)=%%
+ 
 %%[
   SET @success = RequestParameter("Success")
   IF not Empty(@success) THEN
@@ -50,6 +50,8 @@
       SET @resultMessage = "Sorry, something went wrong."
     ENDIF
 ]%%
+
+ %%=v(@success)=%%
  <div
       class="  p-1 p-md-3 m-1 mt-md-1 mr-md-5 ml-md-5 mb-md-0 col col-11 col-md-6 text-center">
 <h3>%%=v(@resultMessage)=%%</h3>
