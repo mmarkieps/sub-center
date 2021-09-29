@@ -119,7 +119,7 @@ console.log("%%=v(@match)=%%")
                 SetObjectProperty(@Subscriber, "Status", "Active")
                 SET @Status = InvokeUpdate(@Subscriber, @createErrDesc, @createErrNo, @createOpts)
             ENDIF
-            IF @rowsAffected==1 THEN
+            IF @rowsAffected==1 and @Status=='OK'  THEN
                 SET @resultMessage = "Success"
                 Redirect(CONCAT(CloudPagesURL(7786, 'Success', 1)))
             ELSE
