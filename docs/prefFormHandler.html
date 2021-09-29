@@ -53,7 +53,6 @@ console.log("%%=v(@match)=%%")
                     "Offers",
                     @offers
                 )
-         
             ELSEIF RequestParameter("unsubscribe") THEN
                 SET @rowsAffected = UpsertData(
                     "prefcenter",
@@ -101,15 +100,18 @@ console.log("%%=v(@match)=%%")
                 )
                 SET @Subscriber = CreateObject("Subscriber")
                 SetObjectProperty(@Subscriber, "SubscriberKey", @subscriberKey)
-               SetObjectProperty(@Subscriber, "Status", "Active")
-                SetObjectProperty(@Subscriber, "First Name", "Active")
+                SetObjectProperty(@Subscriber, "Status", "Active")
+                SET @attr = CreateObject("Attribute")
+                SetObjectProperty(@attr, "Name", "First Name")
+                SetObjectProperty(@attr, "Value", "test")
+                AddObjectArrayItem(@Subscriber, "Attributes", @attr)
                 SET @Status = InvokeUpdate(@Subscriber, @createErrDesc, @createErrNo, @createOpts)
             ENDIF
             IF @rowsAffected==1 THEN
                 SET @resultMessage = "Success"
-                   Redirect(CONCAT(CloudPagesURL(7786,'Success',1)))
+                Redirect(CONCAT(CloudPagesURL(7786, 'Success', 1)))
             ELSE
-               Redirect(CONCAT(CloudPagesURL(7786,'Success',0)))
+                Redirect(CONCAT(CloudPagesURL(7786, 'Success', 0)))
                 SET @resultMessage = "Sorry, something went wrong."
             ENDIF
         ENDIF
