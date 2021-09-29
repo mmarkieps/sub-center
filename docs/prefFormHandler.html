@@ -131,7 +131,7 @@ console.log("%%=v(@match)=%%")
                 SET @resultMessage = "Success"
                 Redirect(CONCAT(CloudPagesURL(7786, 'Success', 1)))
             ELSE
-                Redirect(CONCAT(CloudPagesURL(7786, 'Success', 0)))
+                Redirect(CONCAT(CloudPagesURL(7786,'Success', 1)))
                 SET @resultMessage = "Sorry, something went wrong."
             ENDIF
         ENDIF
