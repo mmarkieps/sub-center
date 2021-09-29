@@ -97,16 +97,16 @@
 ]%%
 
     %%[ IF @isDebug==true THEN ]%%
-<div>%%=v(@subscriberId)=%%</div>
-    <div>%%=v(@firstName)=%%</div>
-    <div>%%=v(@lastName)=%%</div>
-    <div>%%=v(@email)=%%</div>
-    <div>%%=v(@hasOptedOut)=%%</div>
-    <div>%%=v(@newsletter)=%%</div>
-    <div>%%=v(@events)=%%</div>
-    <div>%%=v(@offers)=%%</div>
-    <div>status %%=v(@status)=%%</div>
-    <div>success %%=v(@success)=%%</div>
+<div>%%=@subscriberId v(@subscriberId)=%%</div>
+    <div>@firstName %%=v(@firstName)=%%</div>
+    <div>@lastName %%=v(@lastName)=%%</div>
+    <div>@email %%=v(@email)=%%</div>
+    <div>@hasOptedOut %%=v(@hasOptedOut)=%%</div>
+    <div>@newsletter %%=v(@newsletter)=%%</div>
+    <div>@events %%=v(@events)=%%</div>
+    <div>@offers %%=v(@offers)=%%</div>
+    <div>@status %%=v(@status)=%%</div>
+    <div>@success %%=v(@success)=%%</div>
     %%[ ENDIF ]%%
 
     %%[ IF @hasOptedOut==false THEN ]%%
