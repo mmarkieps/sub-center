@@ -46,8 +46,7 @@ console.log("%%=v(@match)=%%")
                     1,
                     "SubscriberKey",
                     @subscriberkey,
-                    "SubscriberKey",
-                    @subscriberkey,
+                    
                     "Newsletter",
                     @newslette,
                     "Events",
@@ -83,8 +82,8 @@ console.log("%%=v(@match)=%%")
                     1,
                     "SubscriberKey",
                     @subscriberkey,
-                    "HasOptedOut",
-                    "true"
+                    "Status",
+                    "Unsubscribed"
                 )
                 SET @lue = CreateObject("ExecuteRequest")
                 SETObjectProperty(@lue, "Name", "LogUnsubEvent")
@@ -113,14 +112,15 @@ console.log("%%=v(@match)=%%")
                     1,
                     "SubscriberKey",
                     @subscriberkey,
-                    "HasOptedOut",
-                    "false",
+                    
                     "Newsletter",
                     "true",
                     "Events",
                     "true",
                     "Offers",
-                    "true"
+                    "true",
+                    "Status",
+                    "Active"
                 )
                 SET @Subscriber = CreateObject("Subscriber")
                 SetObjectProperty(@Subscriber, "SubscriberKey", @subscriberKey)
