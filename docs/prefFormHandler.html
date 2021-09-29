@@ -64,9 +64,9 @@ console.log("%%=v(@match)=%%")
                 SetObjectProperty(@attr, "Name", "Last Name")
                 SetObjectProperty(@attr, "Value", @lastName)
                 AddObjectArrayItem(@Subscriber, "Attributes", @attr)
-                SET @attr = CreateObject("Attribute")
-                SetObjectProperty(@attr, "Name", "Email")
-                SetObjectProperty(@attr, "Value", @email)
+
+               SetObjectProperty(@Subscriber, "EmailAddress", @email)
+
                 AddObjectArrayItem(@Subscriber, "Attributes", @attr)
                 SET @Status = InvokeUpdate(@Subscriber, @createErrDesc, @createErrNo, @createOpts)
             ELSEIF RequestParameter("unsubscribe") THEN
@@ -89,7 +89,7 @@ console.log("%%=v(@match)=%%")
                 SETObjectProperty(@lue_prop, "Value", "Unsubscribed through custom subscription center")
                 AddObjectArrayItem(@lue, "Parameters", @lue_prop)
                 SET @ll_sub = CreateObject("Subscriber")
-                SetObjectProperty(@ll_sub, "EmailAddress", @email)
+               
                 SetObjectProperty(@ll_sub, "SubscriberKey", @subscriberKey)
                 SetObjectProperty(@ll_sub, "Status", "Unsubscribed")
                 SET @options = CreateObject("UpdateOptions")

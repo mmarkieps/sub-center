@@ -67,7 +67,7 @@
         SET @subscriberRow = Row(@subscriberRows, 1)
         SET @firstName = Field(@subscriberRow, "first name", 0)
         SET @lastName = Field(@subscriberRow, "last name", 0)
-        SET @email = Field(@subscriberRow, "email", 0)
+        SET @email = lookup("_subscribers", "emailAddress", "SubscriberKey", @subscriberkey)
         SET @prefcenterRow = Row(@prefcenterRows, 1)
         SET @hasOptedOut = Field(@prefcenterRow, "hasOptedOut", 0)
         SET @newsletter = Field(@prefcenterRow, "newsletter", 0)
