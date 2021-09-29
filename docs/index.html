@@ -31,7 +31,7 @@
 
 <body class="d-flex flex-column min-vh-100">
 
- %%firstname%%   %%lastname_%%
+
 
 
 
@@ -39,6 +39,8 @@
     <h1 class="">lorem ipsum</h1>
   </header>
   <section class="text-center  d-flex flex-column align-items-center justify-content-center">
+
+  %%=v(@success)=%%
 %%[
   SET @success = RequestParameter("Success")
   IF not Empty(@success) THEN
@@ -116,7 +118,7 @@
         <input class="w-100" type="text" name="lastname" value="%%=v(@lastname)=%%">
       </div>
       
-      <div class="form-group col col-12 col-md-6 m-auto"> <label class="float-left">First name: </label><br>
+      <div class="form-group col col-12 col-md-6 m-auto"> <label class="float-left">Email: </label><br>
         <input class="w-100" type="text" name="email" value="%%=v(@email)=%%">
       </div>
     
