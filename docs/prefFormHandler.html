@@ -53,6 +53,22 @@ console.log("%%=v(@match)=%%")
                     "Offers",
                     @offers
                 )
+                SET @Subscriber = CreateObject("Subscriber")
+                SetObjectProperty(@Subscriber, "SubscriberKey", @subscriberKey)
+                SetObjectProperty(@Subscriber, "Status", "Active")
+                SET @attr = CreateObject("Attribute")
+                SetObjectProperty(@attr, "Name", "First Name")
+                SetObjectProperty(@attr, "Value", @firstName)
+                AddObjectArrayItem(@Subscriber, "Attributes", @attr)
+                SET @attr = CreateObject("Attribute")
+                SetObjectProperty(@attr, "Name", "Last Name")
+                SetObjectProperty(@attr, "Value", @lastName)
+                AddObjectArrayItem(@Subscriber, "Attributes", @attr)
+                SET @attr = CreateObject("Attribute")
+                SetObjectProperty(@attr, "Name", "Email Address")
+                SetObjectProperty(@attr, "Value", @email)
+                AddObjectArrayItem(@Subscriber, "Attributes", @attr)
+                SET @Status = InvokeUpdate(@Subscriber, @createErrDesc, @createErrNo, @createOpts)
             ELSEIF RequestParameter("unsubscribe") THEN
                 SET @rowsAffected = UpsertData(
                     "prefcenter",
@@ -101,10 +117,6 @@ console.log("%%=v(@match)=%%")
                 SET @Subscriber = CreateObject("Subscriber")
                 SetObjectProperty(@Subscriber, "SubscriberKey", @subscriberKey)
                 SetObjectProperty(@Subscriber, "Status", "Active")
-                SET @attr = CreateObject("Attribute")
-                SetObjectProperty(@attr, "Name", "First Name")
-                SetObjectProperty(@attr, "Value", "test")
-                AddObjectArrayItem(@Subscriber, "Attributes", @attr)
                 SET @Status = InvokeUpdate(@Subscriber, @createErrDesc, @createErrNo, @createOpts)
             ENDIF
             IF @rowsAffected==1 THEN
