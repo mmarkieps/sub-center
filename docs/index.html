@@ -51,7 +51,6 @@
     ENDIF
 ]%%
 
- %%=v(@success)=%%
  <div
       class="  p-1 p-md-3 m-1 mt-md-1 mr-md-5 ml-md-5 mb-md-0 col col-11 col-md-6 text-center">
 <h3>%%=v(@resultMessage)=%%</h3>
@@ -59,7 +58,7 @@
 %%[ ENDIF ]%%
 
 %%[
-  SET @isDebug = false
+  SET @isDebug = true
   SET @subscriberkey = _subscriberkey
   IF NOT EMPTY(@subscriberkey) THEN
     SET @subscriberId = lookup("_subscribers", "SubscriberId", "SubscriberKey", @subscriberkey)
@@ -107,6 +106,7 @@
     <div>%%=v(@events)=%%</div>
     <div>%%=v(@offers)=%%</div>
     <div>status %%=v(@status)=%%</div>
+    <div>success %%=v(@success)=%%</div>
     %%[ ENDIF ]%%
 
     %%[ IF @hasOptedOut==false THEN ]%%
