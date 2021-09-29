@@ -101,8 +101,8 @@ console.log("%%=v(@match)=%%")
                 )
                 SET @Subscriber = CreateObject("Subscriber")
                 SetObjectProperty(@Subscriber, "SubscriberKey", @subscriberKey)
-               
-                SetObjectProperty(@Subscriber, "Status", "Active")
+               SetObjectProperty(@Subscriber, "Status", "Active")
+                SetObjectProperty(@Subscriber, "First Name", "Active")
                 SET @Status = InvokeUpdate(@Subscriber, @createErrDesc, @createErrNo, @createOpts)
             ENDIF
             IF @rowsAffected==1 THEN
