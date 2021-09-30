@@ -26,7 +26,7 @@
    Platform.Response.SetResponseHeader("Content-Security-Policy","default-src 'self'");
 </script>
 %%[
-    SET @isDebug = true
+    SET @isDebug = false
     IF LENGTH(@match) > 0 THEN
         SET @subscriberkey = _subscriberkey
         IF NOT EMPTY(@subscriberkey) THEN
