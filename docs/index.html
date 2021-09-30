@@ -58,7 +58,8 @@
 %%[ ENDIF ]%%
 
 %%[
-  SET @isDebug = true
+  /* if @isDebug==true debug parts of code with values of variables will be shown on website */
+  SET @isDebug = false
   SET @subscriberkey = _subscriberkey
   IF NOT EMPTY(@subscriberkey) THEN
     SET @subscriberId = lookup("_subscribers", "SubscriberId", "SubscriberKey", @subscriberkey)
