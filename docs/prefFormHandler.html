@@ -26,6 +26,7 @@
    Platform.Response.SetResponseHeader("Content-Security-Policy","default-src 'self'");
 </script>
 %%[
+    SET @isDebug = true
     IF LENGTH(@match) > 0 THEN
         SET @subscriberkey = _subscriberkey
         IF NOT EMPTY(@subscriberkey) THEN
@@ -116,10 +117,12 @@
                 SetObjectProperty(@Subscriber, "Status", "Active")
                 SET @Status = InvokeUpdate(@Subscriber, @createErrDesc, @createErrNo, @createOpts)
             ENDIF
-            IF @rowsAffected==1 AND @Status=='OK' THEN
-                Redirect(CONCAT(CloudPagesURL(7786, 'Success', 1)))
-            ELSE
-                Redirect(CONCAT(CloudPagesURL(7786, 'Success', -1)))
+            IF @isDebug==false THEN
+                IF @rowsAffected==1 AND @Status=='OK' THEN 
+                  Redirect(CONCAT(CloudPagesURL(7786, 'Success', 1)))
+                ELSE
+                    Redirect(CONCAT(CloudPagesURL(7786, 'Success', -1)))
+                ENDIF
             ENDIF
         ENDIF
     ENDIF
@@ -129,5 +132,10 @@
     
     */
 ]%%
+
+%%[ IF @isDebug==true THEN ]%%
+<div>  @rowsAffected  %%= v(@rowsAffected)=%%</div>
+    <div>@Status %%=v(@Status)=%%</div>
+%%[ ENDIF ]%%
 </body>
 </html>
