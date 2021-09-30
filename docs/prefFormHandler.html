@@ -96,7 +96,7 @@
                 SetObjectProperty(@save, "PropertyName", "Status")
                 AddObjectArrayItem(@options, "SaveOptions", @save)
                 SET @lue_statusCode = InvokeExecute(@lue, @overallStatus, @requestId)
-                SET @update_sub = InvokeUpdate(@ll_sub, @update_sub_status, @update_sub_errorcode, @options)
+                SET @Status = InvokeUpdate(@ll_sub, @update_sub_status, @update_sub_errorcode, @options)
             ELSEIF RequestParameter("subscribe") THEN
                 SET @rowsAffected = UpsertData(
                     "prefcenter",
