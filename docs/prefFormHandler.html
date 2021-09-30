@@ -12,11 +12,6 @@
     SET @pattern = Concat("^", Substring(@url, 1, Subtract(IndexOf(@url, "?"), 1)), ".*")
     SET @match = RegExMatch(@origin, @pattern, 0)
 ]%%
-<script>
-console.log("%%=v(@origin)=%%")
-console.log("%%=v(@pattern)=%%")
-console.log("%%=v(@match)=%%")
-</script>
 <script runat="server">
     Platform.Load("core","1");
     var MATCH = Variable.GetValue("@match");
@@ -46,7 +41,6 @@ console.log("%%=v(@match)=%%")
                     1,
                     "SubscriberKey",
                     @subscriberkey,
-                    
                     "Newsletter",
                     @newsletter,
                     "Events",
@@ -71,10 +65,7 @@ console.log("%%=v(@match)=%%")
                 SetObjectProperty(@attr, "Name", "Last Name")
                 SetObjectProperty(@attr, "Value", @lastName)
                 AddObjectArrayItem(@Subscriber, "Attributes", @attr)
-
-               SetObjectProperty(@Subscriber, "EmailAddress", @email)
-
-                AddObjectArrayItem(@Subscriber, "Attributes", @attr)
+                SetObjectProperty(@Subscriber, "EmailAddress", @email)
                 SET @Status = InvokeUpdate(@Subscriber, @createErrDesc, @createErrNo, @createOpts)
             ELSEIF RequestParameter("unsubscribe") THEN
                 SET @rowsAffected = UpsertData(
@@ -96,7 +87,6 @@ console.log("%%=v(@match)=%%")
                 SETObjectProperty(@lue_prop, "Value", "Unsubscribed through custom subscription center")
                 AddObjectArrayItem(@lue, "Parameters", @lue_prop)
                 SET @ll_sub = CreateObject("Subscriber")
-               
                 SetObjectProperty(@ll_sub, "SubscriberKey", @subscriberKey)
                 SetObjectProperty(@ll_sub, "Status", "Unsubscribed")
                 SET @options = CreateObject("UpdateOptions")
@@ -112,7 +102,6 @@ console.log("%%=v(@match)=%%")
                     1,
                     "SubscriberKey",
                     @subscriberkey,
-                    
                     "Newsletter",
                     "true",
                     "Events",
@@ -127,12 +116,10 @@ console.log("%%=v(@match)=%%")
                 SetObjectProperty(@Subscriber, "Status", "Active")
                 SET @Status = InvokeUpdate(@Subscriber, @createErrDesc, @createErrNo, @createOpts)
             ENDIF
-            IF @rowsAffected==1 and @Status=='OK'  THEN
-                SET @resultMessage = "Success"
+            IF @rowsAffected==1 AND @Status=='OK' THEN
                 Redirect(CONCAT(CloudPagesURL(7786, 'Success', 1)))
             ELSE
-                Redirect(CONCAT(CloudPagesURL(7786,'Success', -1)))
-                SET @resultMessage = "Sorry, something went wrong."
+                Redirect(CONCAT(CloudPagesURL(7786, 'Success', -1)))
             ENDIF
         ENDIF
     ENDIF
@@ -142,8 +129,5 @@ console.log("%%=v(@match)=%%")
     
     */
 ]%%
-
-
-
 </body>
 </html>
