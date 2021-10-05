@@ -32,6 +32,13 @@
         IF NOT EMPTY(@subscriberkey) THEN
             IF RequestParameter("update") THEN
                 SET @firstName = RequestParameter("firstname")
+                /* sanitization */
+                SET @string = @firstName
+                FOR @I = 1 TO LENGTH(@STRING) DO
+                    SET @char = substring(@string, @i, 1)
+                    SET @result = iif(empty(regexmatch(@char, '[a-zA-Z]', 0)), concat(@result,''), concat(@result, @char))
+                NEXT @i
+                SET @firstName = @result
                 SET @lastName = RequestParameter("lastname")
                 SET @email = RequestParameter("email")
                 SET @newsletter = Iif(RequestParameter("newsletter") == "on", "true", "false")
@@ -118,8 +125,7 @@
                 SET @Status = InvokeUpdate(@Subscriber, @createErrDesc, @createErrNo, @createOpts)
             ENDIF
             IF @isDebug==false THEN
-                IF @rowsAffected==1 AND @Status=='OK' THEN 
-                  Redirect(CONCAT(CloudPagesURL(7786, 'Success', 1)))
+                IF @rowsAffected==1 AND @Status=='OK' THEN                    Redirect(CONCAT(CloudPagesURL(7786, 'Success', 1)))
                 ELSE
                     Redirect(CONCAT(CloudPagesURL(7786, 'Success', -1)))
                 ENDIF
